@@ -9,7 +9,7 @@ mrr_get_dd(c_dfname, c_varname)
 \arguments{
 \item{c_dfname}{documented in the dd_all data frame}
 
-\item{c_var}{The variable to be documented}
+\item{c_varname}{The variable to be documented}
 }
 \value{
 params

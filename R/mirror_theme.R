@@ -5,7 +5,7 @@
 #'
 #' @returns ggplot2::theme
 #' @importFrom ggplot2 element_blank element_line element_rect element_text margin rel theme theme_minimal
-#' @importFrom ggtext
+#' @importFrom ggtext element_markdown
 #' @param font default parameter
 #' @param base_size default font size
 #' @export mirror_theme
@@ -18,7 +18,7 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
       plot.title.position = "plot",
       # Text format:
       # This sets the font, size, type and colour of text for the chart's title
-      plot.title = ggplot2::element_text(
+      plot.title = ggtext::element_textbox_simple(
         family = font,
         size = ggplot2::rel(1.8),
         face = "bold",
@@ -28,7 +28,7 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
       ),
       # This sets the font, size, type and colour of text for the chart's subtitle, as well as setting a margin between the title and the subtitle
       # plot.subtitle = ggplot2::element_text(
-      plot.subtitle = ggtext::element_markdown(
+      plot.subtitle = ggtext::element_textbox_simple(
         family = font,
         size = ggplot2::rel(1.3),
         margin = ggplot2::margin(7, 0, 9, 0)
@@ -48,7 +48,7 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
         color = "#333333"
       ),
       # legend.key = ggplot2::element_blank(),
-      legend.text = ggplot2::element_text(
+      legend.text = ggtext::element_textbox_simple(
         family = font,
         size = ggplot2::rel(.9),
         color = "#333333",
