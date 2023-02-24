@@ -16,7 +16,8 @@ Imports:
     ggtext,
     dplyr,
     scales,
-    stringr, 
+    stringr,
+    tidyr,
     rlang
 LazyData: true
 Authors@R: c(

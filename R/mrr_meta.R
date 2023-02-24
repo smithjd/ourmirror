@@ -12,9 +12,9 @@ mrr_meta <- function(c_df_name, c_varname){
   meta_list <- dd_all |> dplyr::filter(
     df == {{c_df_name}} &
       (tag == {{c_varname}} |
-       var_name == {{c_varname}} |
+       var_name == tolower({{c_varname}}) |
        old_var_stub == {{c_varname}} )) |>
-    dplyr::select(df, var_name, tag, old_var_stub, var_label) |>
+    dplyr::select(df, var_name, tag, old_var_stub, var_label, var_question) |>
     as.list()
   meta_list
 }
