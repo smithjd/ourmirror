@@ -4,7 +4,7 @@
 \alias{mrr_count_multiple_vars}
 \title{count the frequency of a single variable}
 \usage{
-mrr_count_multiple_vars(c_df, c_start_var, c_end_var)
+mrr_count_multiple_vars(c_df, c_start_var, c_end_var, c_df_name)
 }
 \arguments{
 \item{c_df}{The dataset to be counted}

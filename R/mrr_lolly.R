@@ -14,7 +14,7 @@ mrr_single_lolly <- function(mrr_params) {
   mrr_title <- toString(str_wrap(p$var_label), 47)
   mrr_caption <- toString(str_wrap(p$var_question, 55)) # needs to be a parameter
 
-  plot <- p$count_df |> ggplot2::ggplot(ggplot2::aes(c_count_var, pct)) +
+  plot <- p$count_df |> ggplot2::ggplot(ggplot2::aes(c_count_var, c_pct)) +
     ggplot2::geom_point(color = "black",
                         size = 4,
                         shape = 21,
@@ -22,7 +22,7 @@ mrr_single_lolly <- function(mrr_params) {
                         alpha = .7) +
     # ggplot2::geom_point(fill = lolly_now, shape = 1, size = 3) +
     ggplot2::geom_segment(ggplot2::aes(
-      y = pct,
+      y = c_pct,
       yend = 0,
       x = c_count_var,
       xend = c_count_var
@@ -54,7 +54,7 @@ mrr_comparison_plot <- function(mrr_params) {
   mrr_caption <- toString(str_wrap(p$var_question, 55))
 
   plot <- p$plot_df |> ggplot2::ggplot() +
-    ggplot2::geom_point(ggplot2::aes(x = c_count_var, y = pct),
+    ggplot2::geom_point(ggplot2::aes(x = c_count_var, y = c_pct),
                         fill = lolly_now,
                         size = 4,
                         alpha = .7,
@@ -67,7 +67,7 @@ mrr_comparison_plot <- function(mrr_params) {
                         shape = 21) +
     # ggplot2::geom_point(fill = lolly_now, shape = 1, size = 3) +
     ggplot2::geom_segment(aes(
-      y = pct,
+      y = c_pct,
       yend = 0,
       x = c_count_var,
       xend = c_count_var

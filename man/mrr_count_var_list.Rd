@@ -4,10 +4,12 @@
 \alias{mrr_count_var_list}
 \title{count the frequency of a single variable}
 \usage{
-mrr_count_var_list(c_df, c_var_list)
+mrr_count_var_list(c_df, c_start_var, c_end_var, c_df_name)
 }
 \arguments{
 \item{c_df}{The dataset to be counted}
+
+\item{c_df_name}{the survey id, for chained calls}
 
 \item{c_var_list}{The list of variables to be counted}
 }
@@ -17,5 +19,5 @@ df_count
 \description{
 \code{mrr_count_var_list} returns a data frame with the counts and percent of total for a list of variables
 
-The variables have to have the same factor structure
+The variables must have the same factor structure
 }

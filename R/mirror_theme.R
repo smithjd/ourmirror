@@ -20,17 +20,17 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
       # This sets the font, size, type and colour of text for the chart's title
       plot.title = ggtext::element_textbox_simple(
         family = font,
-        size = ggplot2::rel(1.8),
+        size = ggplot2::rel(1.4),
         face = "bold",
         hjust = 0,
-        color = "#333333",
+        color = "#666666",
         margin = ggplot2::margin(0, 0, 0, 10)
       ),
       # This sets the font, size, type and colour of text for the chart's subtitle, as well as setting a margin between the title and the subtitle
       # plot.subtitle = ggplot2::element_text(
       plot.subtitle = ggtext::element_textbox_simple(
         family = font,
-        size = ggplot2::rel(1.3),
+        size = ggplot2::rel(1.2),
         margin = ggplot2::margin(7, 0, 9, 0)
       ),
       # plot.caption = ggplot2::element_blank(),
@@ -42,16 +42,16 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
       legend.text.align = 0,
       # legend.justification =
       legend.background = ggplot2::element_blank(),
-      legend.title = ggplot2::element_text(
+      legend.title = element_text(
         family = font,
         size = ggplot2::rel(.9),
-        color = "#333333"
+        color = "#666666"
       ),
       # legend.key = ggplot2::element_blank(),
-      legend.text = ggtext::element_textbox_simple(
+      legend.text = element_text(
         family = font,
         size = ggplot2::rel(.9),
-        color = "#333333",
+        color = "#666666",
         margin = ggplot2::margin(4, 0, 4, 0)
       ),
 
@@ -61,7 +61,7 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
       axis.text = ggplot2::element_text(
         family = font,
         size = ggplot2::rel(1),
-        color = "#333333"
+        color = "#666666"
       ),
       axis.text.x = ggplot2::element_text(margin = ggplot2::margin(5, b = 10)),
       axis.ticks = ggplot2::element_blank(),
@@ -79,6 +79,6 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
 
       # Strip background (#This sets the panel background for facet-wrapped plots to white, removing the standard grey ggplot background colour and sets the title size of the facet-wrap title to font size 22)
       strip.background = ggplot2::element_rect(fill = "white"),
-      strip.text = ggplot2::element_text(size = ggplot2::rel(1.2), hjust = 0)
+      strip.text = ggplot2::element_text(size = ggplot2::rel(1), hjust = 0)
     )
 }
