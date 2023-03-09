@@ -12,6 +12,8 @@ mrr_count_multiple_vars(c_df, c_start_var, c_end_var, c_df_name)
 \item{c_start_var}{The first variable in a sequence to be counted}
 
 \item{c_end_var}{The variable in a sequence to be counted}
+
+\item{c_df_name}{the survey id, for chained calls where 'c_df' is not \emph{true}}
 }
 \value{
 df_count
@@ -20,4 +22,13 @@ df_count
 \code{mrr_count_multiple_vars} returns a data frame with the counts and percent of total for a series of variables
 
 All of the variables in the series must have the same factor structure
+}
+\details{
+params <- mrr_get_dd(m23, "people_in_center_can_give_help_emotional_support")
+
+params$count_df <- m23 |>
+mrr_count_multiple_vars(
+c_start_var = people_in_center_can_give_help_emotional_support,
+c_end_var = people_in_center_can_give_advice_about_practice_etc,
+"m23")
 }

@@ -5,7 +5,6 @@
 #'
 #' @returns ggplot2::theme
 #' @importFrom ggplot2 element_blank element_line element_rect element_text margin rel theme theme_minimal
-#' @importFrom ggtext element_markdown
 #' @param font default parameter
 #' @param base_size default font size
 #' @export mirror_theme
@@ -18,7 +17,7 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
       plot.title.position = "plot",
       # Text format:
       # This sets the font, size, type and colour of text for the chart's title
-      plot.title = ggtext::element_textbox_simple(
+      plot.title = element_text(
         family = font,
         size = ggplot2::rel(1.4),
         face = "bold",
@@ -28,7 +27,7 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
       ),
       # This sets the font, size, type and colour of text for the chart's subtitle, as well as setting a margin between the title and the subtitle
       # plot.subtitle = ggplot2::element_text(
-      plot.subtitle = ggtext::element_textbox_simple(
+      plot.subtitle = element_textbox(
         family = font,
         size = ggplot2::rel(1.2),
         margin = ggplot2::margin(7, 0, 9, 0)
@@ -78,7 +77,9 @@ mirror_theme <- function(font = "Helvetica", base_size = 14) {
       panel.background = ggplot2::element_blank(),
 
       # Strip background (#This sets the panel background for facet-wrapped plots to white, removing the standard grey ggplot background colour and sets the title size of the facet-wrap title to font size 22)
-      strip.background = ggplot2::element_rect(fill = "white"),
-      strip.text = ggplot2::element_text(size = ggplot2::rel(1), hjust = 0)
+      strip.background = ggplot2::element_rect(fill = "white",
+                                               linewidth = 0),
+      strip.text = ggplot2::element_text(size = ggplot2::rel(1),
+                                         hjust = 0)
     )
 }

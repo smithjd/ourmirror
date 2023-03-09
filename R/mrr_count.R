@@ -20,7 +20,20 @@ mrr_get_dd <- function(c_dfname, c_varname){
 #' count the frequency of a single variable
 #'
 #' @description
-#' `mrr_count` returns a data frame with the counts and percent of total
+#' `mrr_count_single` returns a data frame with the counts and percent of total
+#'
+#' @details
+#' Here is an example of using 'mrr_count_single'
+#' count_df_now <- m23 |>  mrr_count(c_var = "relate_to_group_or_center") |>
+#'   mutate(c_count_var = fct_relabel(c_count_var, word, 1))
+#'
+#' params <- m23 |>  mrr_get_dd(c_varname =  "relate_to_group_or_center")
+#' params$count_df23 <- count_df_now
+#'
+#' count_df_then <- m22 |>  mrr_count(c_var = "yes_relate_to_a_local_center", c_now = FALSE ) |>
+#'   mutate(c_count_var_then = fct_relabel(c_count_var_then, word, 1))
+#'
+#' params$count_df <- bind_cols(count_df_now, count_df_then)
 #'
 #' @returns df_count
 #' @importFrom rlang ensym
@@ -28,8 +41,9 @@ mrr_get_dd <- function(c_dfname, c_varname){
 #' @importFrom tibble as_tibble
 #' @param c_df The dataset to be counted
 #' @param c_var The variable with values to be counted
-#' @export mrr_count
-mrr_count <- function(c_df, c_var, c_now = TRUE) {
+#' @param c_now A flag that appends "then" to putput variables when set to "FALSE"
+#' @export mrr_count_single
+mrr_count_single <- function(c_df, c_var, c_now = TRUE) {
   # returns a data frame
   my_count_var <- rlang::ensym(c_var)
   # my_df_name <- deparse(match.call()$c_df)
@@ -39,10 +53,10 @@ mrr_count <- function(c_df, c_var, c_now = TRUE) {
     # any by_vars could still have NAs
     dplyr::mutate(c_pct = (n / sum(n)) ) |>
     tibble::as_tibble()
-if(c_now == TRUE){
-  names(df_count) <- c("c_count_var", "n", "c_pct")
+if(c_now == TRUE) {
+  names(df_count) <- c("c_count_var", "c_n", "c_pct")
   } else{
-  names(df_count) <- c("c_count_var_then", "n_then", "pct_then")
+  names(df_count) <- c("c_count_var_then", "c_n_then", "c_pct_then")
   }
   df_count
 }
@@ -54,20 +68,30 @@ if(c_now == TRUE){
 #'
 #' All of the variables in the series must have the same factor structure
 #'
+#' @details
+#' params <- mrr_get_dd(m23, "people_in_center_can_give_help_emotional_support")
+#'
+#' params$count_df <- m23 |>
+#'   mrr_count_multiple_vars(
+#'     c_start_var = people_in_center_can_give_help_emotional_support,
+#'     c_end_var = people_in_center_can_give_advice_about_practice_etc,
+#'     "m23")
+#'
 #' @returns df_count
 #' @importFrom dplyr filter count mutate select group_by
 #' @importFrom tidyr pivot_longer
 #' @param c_df The dataset to be counted
 #' @param c_start_var The first variable in a sequence to be counted
 #' @param c_end_var The variable in a sequence to be counted
+#' @param c_df_name the survey id, for chained calls where 'c_df' is not *true*
 #' @export mrr_count_multiple_vars
 mrr_count_multiple_vars <- function(c_df, c_start_var, c_end_var, c_df_name) {
-  # c_df_name <- deparse(match.call()$c_df_name)
   c_denominator <- nrow(c_df)
   df_count <- c_df |>
     dplyr::select(respondent_id,
                   {{c_start_var}}:{{c_end_var}}) |>
     mutate(across(everything(), unclass)) |>
+    # could have a step at the end that restores factor levels...
     tidyr::pivot_longer(names_to = "c_var_name",
                         values_to = "c_var_value",
                         -respondent_id) |>
@@ -93,9 +117,9 @@ mrr_count_multiple_vars <- function(c_df, c_start_var, c_end_var, c_df_name) {
 #' @importFrom tidyr pivot_longer
 #' @param c_df The dataset to be counted
 #' @param c_var_list The list of variables to be counted
-#' @param c_df_name the survey id, for chained calls
+#' @param c_df_name the survey id, for chained calls where 'c_df' is not *true*
 #' @export mrr_count_var_list
-mrr_count_var_list <- function(c_df, c_var_list) {
+mrr_count_var_list <- function(c_df, c_var_list, c_df_name) {
   dfname <- deparse(match.call()$c_df)
   select_list <- c("respondent_id", c_var_list)
   df_count <- c_df |>

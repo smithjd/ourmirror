@@ -47,31 +47,40 @@ mrr_single_lolly <- function(mrr_params) {
 #' @importFrom scales percent
 #' @returns plot
 #' @param mrr_params a list containing metadata elements and a data frame named count$df
-#' @export mrr_comparison_plot
-mrr_comparison_plot <- function(mrr_params) {
+#' @export mrr_comparison_lolly
+mrr_comparison_lolly <- function(mrr_params) {
   p <- {{mrr_params}}
   mrr_title <- toString(str_wrap(p$var_label), 47)
   mrr_caption <- toString(str_wrap(p$var_question, 55))
 
-  plot <- p$plot_df |> ggplot2::ggplot() +
+  plot <- p$count_df |> ggplot2::ggplot() +
     ggplot2::geom_point(ggplot2::aes(x = c_count_var, y = c_pct),
                         fill = lolly_now,
                         size = 4,
                         alpha = .7,
-                        shape = 21) +
-    ggplot2::geom_point(ggplot2::aes(x = c_count_var, y = pct_then),
+                        shape = 21,
+                        position = position_nudge(x = 0.05)) +
+    ggplot2::geom_point(ggplot2::aes(x = c_count_var, y = c_pct_then),
                         color = lolly_then,
                         fill = lolly_then,
                         size = 4,
                         alpha = .4,
-                        shape = 21) +
+                        shape = 21,
+                        position = position_nudge(x = -0.05)) +
     # ggplot2::geom_point(fill = lolly_now, shape = 1, size = 3) +
     ggplot2::geom_segment(aes(
       y = c_pct,
       yend = 0,
       x = c_count_var,
       xend = c_count_var
-    ), color = lolly_now ) +
+    ), color = lolly_now, position = position_nudge(x = 0.05)) +
+    ggplot2::geom_segment(aes(
+      y = c_pct_then,
+      yend = 0,
+      x = c_count_var,
+      xend = c_count_var
+    ), color = lolly_then,
+    position = position_nudge(x = -0.05) ) +
     ggplot2::scale_y_continuous(labels = scales::percent,
                                 ggplot2::expansion(mult = c(0, .1))) +
     ggplot2::coord_flip() +
@@ -98,5 +107,4 @@ mrr_comparison_plot <- function(mrr_params) {
 # count_df_then <- m22 |>  mrr_count(c_var = "yes_relate_to_a_local_center", c_now = FALSE ) |>
 #   mutate(c_count_var_then = fct_relabel(c_count_var_then, word, 1))
 #
-#
-# params$plot_df <- bind_cols(count_df_now, count_df_then)
+# params$count_df <- bind_cols(count_df_now, count_df_then)
