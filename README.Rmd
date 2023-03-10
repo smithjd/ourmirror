@@ -1,19 +1,113 @@
-Our Mirror
-================
+---
+title: "Our Mirror"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      dev = "ragg_png")
+
+mirror_theme <- function(font = "Gandhi Sans", base_size = 14) {
+  # font <- "ghandi"
+  # on.load() function?
+  # font <- "Helvetica"
+  ggplot2::theme_minimal() +
+    ggplot2::theme(
+      # This sets the default text color and font across the rest of the text elements
+      text = element_text(
+        family = "Ghandi Sans",
+        color = shambhala_palette[["Light Text"]]
+      ),
+      plot.title.position = "plot",
+      # Text format:
+      # This sets the font, size, type and colour of text for the chart's title
+      plot.title = ggtext::element_textbox(
+        family = font,
+        size = ggplot2::rel(1.4),
+        face = "bold",
+        hjust = 0,
+        color = shambhala_palette[["Dark Text"]],
+        margin = ggplot2::margin(10, 0, 0, 10)
+      ),
+      # This sets the font, size, type and colour of text for the chart's subtitle, as well as setting a margin between the title and the subtitle
+      # plot.subtitle = ggplot2::element_text(
+      plot.subtitle = ggtext::element_textbox(
+        family = font,
+        hjust = 0,
+        size = ggplot2::rel(1.1),
+        margin = ggplot2::margin(7, 0, 9, 10)
+      ),
+      # plot.caption = ggplot2::element_blank(),
+      # This leaves the caption text element empty, because it is set elsewhere in the finalise plot function
+
+      # Legend format
+      # This sets the position and alignment of the legend, removes a title and backround for it and sets the requirements for any text within the legend. The legend may often need some more manual tweaking when it comes to its exact position based on the plot coordinates.
+      # legend.position = "top",
+      legend.text.align = 0,
+      # legend.justification =
+      legend.background = ggplot2::element_blank(),
+      legend.title = element_text(
+        family = font,
+        size = ggplot2::rel(.9),
+        color = shambhala_palette[["Dark Text"]],
+      ),
+      # legend.key = ggplot2::element_blank(),
+      legend.text = element_text(
+        family = font,
+        size = ggplot2::rel(.9),
+        color = shambhala_palette[["Light Text"]],
+        margin = ggplot2::margin(4, 0, 4, 0)
+      ),
+
+      # Axis format
+      # This sets the text font, size and colour for the axis test, as well as setting the margins and removes lines and ticks. In some cases, axis lines and axis ticks are things we would want to have in the chart - the cookbook shows examples of how to do so.
+      axis.title = ggplot2::element_blank(),
+      axis.text = ggplot2::element_text(
+        # We need to reset the font and color within axis text, because theme_minimal() sets its own default
+        family = font,
+        color = shambhala_palette[["Light Text"]],
+        size = ggplot2::rel(1),
+        #    color = "#666666"
+      ),
+      axis.text.x = ggplot2::element_text(margin = ggplot2::margin(5, b = 10),
+                                          color = shambhala_palette[["Light Text"]],),
+      axis.ticks = ggplot2::element_blank(),
+      # axis.line = ggplot2::element_blank(),
+
+      # Grid lines
+      # This removes all minor gridlines and adds major y gridlines. In many cases you will want to change this to remove y gridlines and add x gridlines. The cookbook shows you examples for doing so
+      panel.grid.minor = ggplot2::element_blank(),
+   #   panel.grid.major.y = ggplot2::element_line(color = "#cbcbcb"),
+  #    panel.grid.major.x = ggplot2::element_blank(),
+      panel.grid = element_line(color = shambhala_palette[["Grid"]]),
+
+      # Blank background
+      # This sets the panel background as blank, removing the standard grey ggplot background colour from the plot
+      panel.background = ggplot2::element_blank(),
+
+      # Strip background (#This sets the panel background for facet-wrapped plots to white, removing the standard grey ggplot background colour and sets the title size of the facet-wrap title to font size 22)
+      strip.background = ggplot2::element_rect(fill = "white"),
+      strip.text = ggplot2::element_text(size = ggplot2::rel(1),
+                                         hjust = 0)
+    )
+}
+
+
+```
 
 ## Shambhala colours
 
-Here are Shambhala’s standard colors:
+Here are Shambhala's standard colors:
 
-- “\#333333” - Thunder
-- “\#048032” - Fun Green
-- “\#CA1226” - Crimson
-- “\#FFBB01” - Selective Yellow
-- “\#003780” - Resolution Blue
+- "#333333" - Thunder
+- "#048032" - Fun Green
+- "#CA1226" - Crimson
+- "#FFBB01" - Selective Yellow
+- "#003780" - Resolution Blue
 
-Let’s combine them into a vector for easier use across plots:
+Let's combine them into a vector for easier use across plots:
 
-``` r
+```{r}
 shambhala_full_colors <- c("Thunder" = "#333333",
                            "Green" = "#048032",
                            "Crimson" = "#CA1226",
@@ -21,53 +115,49 @@ shambhala_full_colors <- c("Thunder" = "#333333",
                            "Blue" = "#003780")
 
 monochromeR::view_palette(shambhala_full_colors)
-```
 
-![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+```
 
 In addition, the website uses the following colors:
 
-``` r
+```{r}
 shambhala_full_colors <- c(shambhala_full_colors,
                       "Light Blue" = "#7EB8DF",
                       "Navy Text" = "#003366",
                       "Dark Text" = "#3F3122")
 
 monochromeR::view_palette(shambhala_full_colors)
-```
 
-![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+```
 
 ### Streamlining the colours used for text
 
-I suggest dropping the last two colours (used for text on the website),
-and instead using the following colors in the plots and on the website,
-which are based on the light blue and the thunder color.
+I suggest dropping the last two colours (used for text on the website), and instead using the following colors in the plots and on the website, which are based on the light blue and the thunder color.
 
-``` r
+```{r}
+
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
                       "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417") # To be used in plot descriptions and the body of the text on the website
+
 ```
+
 
 ### Streamlining the colours used for visualisations
 
-To create a unifying theme across all the visualisations, regardless of
-which colors are used, we will use the text colors above. In addition,
-we can use a related color for grid lines:
+To create a unifying theme across all the visualisations, regardless of which colors are used, we will use the text colors above. In addition, we can use a related color for grid lines:
 
-``` r
+```{r}
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
                       "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417",
                       "Grid" = "#F5F6F7")
+
 ```
 
-To add a sense of unity across the visualisations and the web page, I
-have blended in a bit of the light blue with all of the bold colors.
-Here is the outcome:
+To add a sense of unity across the visualisations and the web page, I have blended in a bit of the light blue with all of the bold colors. Here is the outcome:
 
-``` r
+```{r}
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
                       "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417",
@@ -78,37 +168,14 @@ shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text tha
                       "Blue" = "#587AA7")
 
 monochromeR::view_palette(shambhala_palette)
+
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+Within each data visualisation, I suggest using only one key color from your bold palette, or maybe two max, but they do now work nicely together: 
 
-Within each data visualisation, I suggest using only one key color from
-your bold palette, or maybe two max, but they do now work nicely
-together:
-
-``` r
+```{r}
 library(tidyverse)
-```
 
-    ## Warning: package 'tidyverse' was built under R version 4.1.3
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
-    ## v ggplot2 3.3.6     v purrr   0.3.4
-    ## v tibble  3.1.8     v dplyr   1.0.9
-    ## v tidyr   1.1.4     v stringr 1.4.0
-    ## v readr   2.1.1     v forcats 0.5.1
-
-    ## Warning: package 'ggplot2' was built under R version 4.1.3
-
-    ## Warning: package 'tibble' was built under R version 4.1.3
-
-    ## Warning: package 'dplyr' was built under R version 4.1.3
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
 palmerpenguins::penguins %>%
   group_by(species, island) %>%
   count() %>%
@@ -120,11 +187,7 @@ palmerpenguins::penguins %>%
                                shambhala_palette[["Blue"]], 
                                shambhala_palette[["Yellow"]])) +
   theme_minimal()
-```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
-
-``` r
 palmerpenguins::penguins %>%
   group_by(species, island) %>%
   count() %>%
@@ -136,16 +199,12 @@ palmerpenguins::penguins %>%
                                shambhala_palette[["Blue"]], 
                                shambhala_palette[["Crimson"]])) +
   theme_minimal()
+
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
+Try to apply the colours semantically. For "NA" equivalents (e.g. "Don't know", "Not specified", etc), use the `Light Text` colour. For sentiments heading in that direction ("neutral" on a likert scale), blend your key colour with the Grid color:
 
-Try to apply the colours semantically. For “NA” equivalents (e.g. “Don’t
-know”, “Not specified”, etc), use the `Light Text` colour. For
-sentiments heading in that direction (“neutral” on a likert scale),
-blend your key colour with the Grid color:
-
-``` r
+```{r}
 palmerpenguins::penguins %>%
   group_by(species, island) %>%
   count() %>%
@@ -157,20 +216,13 @@ palmerpenguins::penguins %>%
                                                            blend_colour = shambhala_palette[["Grid"]],
                                                            n_colours = 3)) +
   theme_minimal() 
+
 ```
 
-    ## 
-    ## Because you supplied a blend_colour, the modification variable is set to "blend".
-    ## To use other modification options ("go_darker", "go_lighter" or "go_both_ways"),
-    ## leave blend_colour as NULL.
+And make the most of transparency and size for comparing this year to last year, rather than using a different color. See these two plots for why. 
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-And make the most of transparency and size for comparing this year to
-last year, rather than using a different color. See these two plots for
-why.
-
-``` r
+```{r}
 palmerpenguins::penguins %>%
   filter(island %in% c("Biscoe", "Dream")) %>%
   ggplot() +
@@ -181,13 +233,11 @@ palmerpenguins::penguins %>%
   scale_color_manual(values = c(shambhala_palette[["Green"]], 
                                shambhala_palette[["Blue"]])) +
   theme_minimal() 
+  
 ```
 
-    ## Warning: Removed 1 rows containing missing values (geom_point).
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
-
-``` r
+```{r}
 palmerpenguins::penguins %>%
   filter(island %in% c("Biscoe", "Dream")) %>%
   ggplot() +
@@ -199,23 +249,15 @@ palmerpenguins::penguins %>%
   scale_alpha_discrete(range = c(0.3, 0.9)) +
   labs("Using alpha and size to differentiate") +
   theme_minimal() 
+  
 ```
-
-    ## Warning: Using alpha for a discrete variable is not advised.
-
-    ## Warning: Using size for a discrete variable is not advised.
-
-    ## Warning: Removed 1 rows containing missing values (geom_point).
-
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ### Applying these within `mirror_theme()`
 
-I have adapted the theme code to bring in the fonts from the rest of the
-website, the text colours discussed above, and the grid line color. Here
-are the original plots:
+I have adapted the theme code to bring in the fonts from the rest of the website, the text colours discussed above, and the grid line color. Here are the original plots:
 
-``` r
+```{r}
+
 palmerpenguins::penguins %>%
   group_by(species, island) %>%
   count() %>%
@@ -230,16 +272,7 @@ palmerpenguins::penguins %>%
                                                            modification = "blend",
                                                            n_colours = 3)) +
   theme_minimal() 
-```
 
-    ## 
-    ## Because you supplied a blend_colour, the modification variable is set to "blend".
-    ## To use other modification options ("go_darker", "go_lighter" or "go_both_ways"),
-    ## leave blend_colour as NULL.
-
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
-
-``` r
 palmerpenguins::penguins %>%
   group_by(species, island) %>%
   count() %>%
@@ -253,13 +286,13 @@ palmerpenguins::penguins %>%
   labs(title = "Here are some penguins who live on different islands",
        subtitle = "The Adelies are everywhere!") +
   theme_minimal()
-```
 
-![](README_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->
+```
 
 And they are again with the theme:
 
-``` r
+```{r}
+
 palmerpenguins::penguins %>%
   group_by(species, island) %>%
   count() %>%
@@ -273,11 +306,7 @@ palmerpenguins::penguins %>%
   labs(title = "Here are some penguins who live on different islands",
        subtitle = "The Adelies are everywhere!") +
   mirror_theme()
-```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
-
-``` r
 palmerpenguins::penguins %>%
   group_by(species, island) %>%
   count() %>%
@@ -292,11 +321,7 @@ palmerpenguins::penguins %>%
                                                            modification = "blend",
                                                            n_colours = 3)) +
   mirror_theme() 
+
 ```
 
-    ## 
-    ## Because you supplied a blend_colour, the modification variable is set to "blend".
-    ## To use other modification options ("go_darker", "go_lighter" or "go_both_ways"),
-    ## leave blend_colour as NULL.
 
-![](README_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
