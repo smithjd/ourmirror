@@ -14,7 +14,7 @@ mrr_get_dd <- function(c_dfname, c_varname){
   params <- dd_all |>
     dplyr::filter(df == dfname, tag == {{c_varname}} ) |>
     as.list()
-  params
+  return(params)
 }
 
 #' count the frequency of a single variable
@@ -53,12 +53,12 @@ mrr_count_single <- function(c_df, c_var, c_now = TRUE) {
     # any by_vars could still have NAs
     dplyr::mutate(c_pct = (n / sum(n)) ) |>
     tibble::as_tibble()
-if(c_now == TRUE) {
+if(c_now) {
   names(df_count) <- c("c_count_var", "c_n", "c_pct")
   } else{
   names(df_count) <- c("c_count_var_then", "c_n_then", "c_pct_then")
   }
-  df_count
+  return(df_count)
 }
 
 #' count the frequency of a single variable
@@ -102,7 +102,7 @@ mrr_count_multiple_vars <- function(c_df, c_start_var, c_end_var, c_df_name) {
                   df_name = c_df_name) |>
     dplyr::left_join(dd_all, by = c("c_var_name" = "tag", df_name = "df")) |>
     ungroup()
-  df_count
+  return(df_count)
 }
 
 #' count the frequency of a single variable
@@ -133,6 +133,6 @@ mrr_count_var_list <- function(c_df, c_var_list, c_df_name) {
     dplyr::mutate(c_pct = n_response_count / sum(n_response_count),
                   df_name = dfname) |>
     dplyr::left_join(dd_all, by = c("c_var_name" = "tag", df_name = "df"))
-  df_count
+  return(df_count)
 }
 
