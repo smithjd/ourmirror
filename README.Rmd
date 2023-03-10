@@ -137,7 +137,7 @@ I suggest dropping the last two colours (used for text on the website), and inst
 ```{r}
 
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
-                      "Header Text" = "#003366", # To be used for headers on the website
+                      "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417") # To be used in plot descriptions and the body of the text on the website
 
 ```
@@ -149,7 +149,7 @@ To create a unifying theme across all the visualisations, regardless of which co
 
 ```{r}
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
-                      "Header Text" = "#003366", # To be used for headers on the website
+                      "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417",
                       "Grid" = "#F5F6F7")
 
@@ -159,7 +159,7 @@ To add a sense of unity across the visualisations and the web page, I have blend
 
 ```{r}
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
-                      "Header Text" = "#003366", # To be used for headers on the website
+                      "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417",
                       "Grid" = "#F5F6F7",
                       "Green" = "#5AA678",

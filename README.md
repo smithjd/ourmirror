@@ -46,7 +46,7 @@ which are based on the light blue and the thunder color.
 
 ``` r
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
-                      "Header Text" = "#003366", # To be used for headers on the website
+                      "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417") # To be used in plot descriptions and the body of the text on the website
 ```
 
@@ -58,7 +58,7 @@ we can use a related color for grid lines:
 
 ``` r
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
-                      "Header Text" = "#003366", # To be used for headers on the website
+                      "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417",
                       "Grid" = "#F5F6F7")
 ```
@@ -69,7 +69,7 @@ Here is the outcome:
 
 ``` r
 shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
-                      "Header Text" = "#003366", # To be used for headers on the website
+                      "Header Text" = "#303E47", # To be used for headers on the website
                       "Dark Text" = "#101417",
                       "Grid" = "#F5F6F7",
                       "Green" = "#5AA678",
