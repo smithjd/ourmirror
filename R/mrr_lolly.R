@@ -46,51 +46,48 @@ mrr_single_lolly <- function(mrr_params) {
 #' @importFrom stringr str_wrap
 #' @importFrom scales percent
 #' @returns plot
-#' @param mrr_params a list containing metadata elements and a data frame named count$df
+#' @param df a data frame containing at least 3 variables: c_pct, c_pct_then, and var_label
 #' @export mrr_comparison_lolly
-mrr_comparison_lolly <- function(mrr_params) {
-  p <- {{mrr_params}}
-  mrr_title <- toString(str_wrap(p$var_label), 47)
-  mrr_caption <- toString(str_wrap(p$var_question, 55))
-
-  plot <- p$count_df |> ggplot2::ggplot() +
-    ggplot2::geom_point(ggplot2::aes(x = c_count_var, y = c_pct),
-                        fill = lolly_now,
-                        size = 4,
-                        alpha = .7,
-                        shape = 21,
-                        position = position_nudge(x = 0.05)) +
-    ggplot2::geom_point(ggplot2::aes(x = c_count_var, y = c_pct_then),
-                        color = lolly_then,
-                        fill = lolly_then,
-                        size = 4,
-                        alpha = .4,
-                        shape = 21,
-                        position = position_nudge(x = -0.05)) +
-    # ggplot2::geom_point(fill = lolly_now, shape = 1, size = 3) +
+mrr_comparison_lolly <- function(df) {
+  ggplot2::ggplot(df) +
     ggplot2::geom_segment(aes(
       y = c_pct,
       yend = 0,
-      x = c_count_var,
-      xend = c_count_var
-    ), color = lolly_now, position = position_nudge(x = 0.05)) +
+      x = var_label,
+      xend = var_label),
+      color = lolly_now,
+      position = position_nudge(x = 0.12)) +
     ggplot2::geom_segment(aes(
       y = c_pct_then,
       yend = 0,
-      x = c_count_var,
-      xend = c_count_var
-    ), color = lolly_then,
-    position = position_nudge(x = -0.05) ) +
+      x = var_label,
+      xend = var_label),
+      color = lolly_then,
+      position = position_nudge(x = -0.12) ) +
+    ggplot2::geom_point(ggplot2::aes(
+      x = var_label,
+      y = c_pct),
+      fill = lolly_now,
+      color = lolly_now,
+      size = 6,
+      alpha = 1,
+      shape = 21,
+      position = position_nudge(x = 0.12)) +
+    ggplot2::geom_point(ggplot2::aes(
+      x = var_label, y = c_pct_then),
+      color = lolly_then,
+      fill = lolly_then,
+      size = 4,
+      alpha = 1,
+      shape = 21,
+      position = position_nudge(x = -0.12)) +
     ggplot2::scale_y_continuous(labels = scales::percent,
                                 ggplot2::expansion(mult = c(0, .1))) +
     ggplot2::coord_flip() +
     ourmirror::mirror_theme() +
-    ggplot2::labs(title = p$var_question) +
-    ggplot2::theme(panel.grid.major.y = ggplot2::element_blank()
-    )
-  # font <- "ghandi"
-  # on.load() function?
-  # font <- "Helvetica"
+    # ggplot2::labs(title = p$var_question) +
+    ggplot2::theme(panel.grid.major.y = ggplot2::element_blank()) -> plot
+
   plot
 }
 

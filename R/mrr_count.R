@@ -45,19 +45,25 @@ mrr_get_dd <- function(c_dfname, c_varname){
 #' @export mrr_count_single
 mrr_count_single <- function(c_df, c_var, c_now = TRUE) {
   # returns a data frame
+  my_df_name <- deparse(substitute(c_df))
   my_count_var <- rlang::ensym(c_var)
-  # my_df_name <- deparse(match.call()$c_df)
+  params <- dd_all |>
+    dplyr::filter(df == my_df_name, tag == {{c_var}} ) |>
+    as.list()
+  var_label <- params$var_label
   df_count <- c_df |>
     dplyr::count({{my_count_var}}) |>
     dplyr::filter(!is.na({{my_count_var}})) |>
     # any by_vars could still have NAs
     dplyr::mutate(c_pct = (n / sum(n)) ) |>
     tibble::as_tibble()
-if(c_now) {
-  names(df_count) <- c("c_count_var", "c_n", "c_pct")
+  if (c_now) {
+    names(df_count) <- c("c_var_name", "c_n", "c_pct" )
   } else{
-  names(df_count) <- c("c_count_var_then", "c_n_then", "c_pct_then")
+    names(df_count) <- c("c_count_var_then", "c_n_then", "c_pct_then")
   }
+  df_count <- df_count |>
+    mutate(var_label = var_label)
   return(df_count)
 }
 
