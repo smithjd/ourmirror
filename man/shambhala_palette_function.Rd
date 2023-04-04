@@ -13,6 +13,6 @@ A character vector containing the Shambhala color palette.
 This function creates a color palette for Societal Mirror website.
 }
 \examples{
-shambhala_palette()
+shambhala_palette_function()
 
 }

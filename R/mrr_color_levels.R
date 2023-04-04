@@ -48,7 +48,7 @@ mrr_color_both_ways <- function(color_number, levels) {
 #' @return A character vector containing the Shambhala color palette.
 #'
 #' @examples
-#' shambhala_palette()
+#' shambhala_palette_function()
 #'
 #' @export shambhala_palette_function
 shambhala_palette_function <- function(){

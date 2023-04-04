@@ -2,7 +2,7 @@
 % Please edit documentation in R/mrr_count.R
 \name{mrr_count_var_list}
 \alias{mrr_count_var_list}
-\title{count the frequency of a single variable}
+\title{count the frequency of one or more variables}
 \usage{
 mrr_count_var_list(c_df, c_var_list, c_df_name)
 }
@@ -17,7 +17,19 @@ mrr_count_var_list(c_df, c_var_list, c_df_name)
 df_count
 }
 \description{
-\code{mrr_count_var_list} returns a data frame with the counts and percent of total for a list of variables
-
-The variables must have the same factor structure
+\code{mrr_count_var_list} returns a data frame with the counts and percent of
+respective totals for a list of variables
 }
+\details{
+Multiple variables need to be in a character vector.
+
+All of the variables must have the same factor structure
+}
+\section{may need to rename variables afterwards:}{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  if (c_now) \{
+    names(df_count) <- c("c_var_name", "c_n", "c_pct" )
+    \} else\{
+      names(df_count) <- c("c_count_var_then", "c_n_then", "c_pct_then")
+}\if{html}{\out{</div>}}
+}
+
