@@ -55,7 +55,7 @@ shambhala_palette_function <- function(){
   shambhala_palette <- c("Light Text" = "#516877", # to be used for axes, text that is less important
                          "Header Text" = "#303E47", # To be used for headers on the website
                          "Dark Text" = "#101417",
-                         "Grid" = "#F5F6F7",
+                         "Grid" = "#DCE0E3",
                          "Green" = "#5AA678",
                          "Crimson" = "#D16471",
                          "Yellow" = "#F1C95B",
