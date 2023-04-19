@@ -4,7 +4,7 @@
 \alias{mirror_theme}
 \title{Create a ggplot2 theme}
 \usage{
-mirror_theme(font = "Helvetica", base_size = 14)
+mirror_theme(font = "Gandhi Sans", base_size = 14)
 }
 \arguments{
 \item{font}{default parameter}

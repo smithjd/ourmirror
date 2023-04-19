@@ -4,10 +4,10 @@
 \alias{mrr_comparison_lolly}
 \title{single and multiple lollypop plots}
 \usage{
-mrr_comparison_lolly(mrr_params)
+mrr_comparison_lolly(df)
 }
 \arguments{
-\item{mrr_params}{a list containing metadata elements and a data frame named count$df}
+\item{df}{a data frame containing at least 3 variables: c_pct, c_pct_then, and var_label}
 }
 \value{
 plot
