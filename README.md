@@ -209,6 +209,45 @@ palmerpenguins::penguins %>%
 
 ![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
+Positive to negative colour options:
+
+``` r
+monochromeR::generate_palette("#587AA7", "go_lighter", n_colours = 3, view_palette = TRUE)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+    ## [1] "#587AA7" "#9AAFCA" "#DDE4ED"
+
+``` r
+monochromeR::generate_palette("#5AA678", "go_lighter", n_colours = 3, view_palette = TRUE)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->
+
+    ## [1] "#5AA678" "#9CC9AE" "#DEEDE4"
+
+``` r
+monochromeR::generate_palette("#DEEDE4", blend_colour = "#DDE4ED", n_colours = 3, view_palette = TRUE)
+```
+
+    ## 
+    ## Because you supplied a blend_colour, the modification variable is set to "blend".
+    ## To use other modification options ("go_darker", "go_lighter" or "go_both_ways"),
+    ## leave blend_colour as NULL.
+
+![](README_files/figure-gfm/unnamed-chunk-10-3.png)<!-- -->
+
+    ## [1] "#DEEDE4" "#DDE9E7" "#DDE5EB"
+
+``` r
+pos_neg <- c("#587AA7", "#9AAFCA", "#DDE9E7", "#9CC9AE", "#5AA678")
+
+monochromeR::view_palette(pos_neg)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-10-4.png)<!-- -->
+
 ### Applying these within `mirror_theme()`
 
 I have adapted the theme code to bring in the fonts from the rest of the
@@ -237,7 +276,7 @@ palmerpenguins::penguins %>%
     ## To use other modification options ("go_darker", "go_lighter" or "go_both_ways"),
     ## leave blend_colour as NULL.
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 palmerpenguins::penguins %>%
@@ -255,7 +294,7 @@ palmerpenguins::penguins %>%
   theme_minimal()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
 
 And they are again with the theme:
 
@@ -275,7 +314,7 @@ palmerpenguins::penguins %>%
   mirror_theme()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 palmerpenguins::penguins %>%
@@ -299,4 +338,4 @@ palmerpenguins::penguins %>%
     ## To use other modification options ("go_darker", "go_lighter" or "go_both_ways"),
     ## leave blend_colour as NULL.
 
-![](README_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-2.png)<!-- -->

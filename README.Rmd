@@ -252,6 +252,24 @@ palmerpenguins::penguins %>%
   
 ```
 
+
+Positive to negative colour options:
+
+```{r}
+monochromeR::generate_palette("#587AA7", "go_lighter", n_colours = 3, view_palette = TRUE)
+
+monochromeR::generate_palette("#5AA678", "go_lighter", n_colours = 3, view_palette = TRUE)
+
+monochromeR::generate_palette("#DEEDE4", blend_colour = "#DDE4ED", n_colours = 3, view_palette = TRUE)
+
+pos_neg <- c("#587AA7", "#9AAFCA", "#DDE9E7", "#9CC9AE", "#5AA678")
+
+monochromeR::view_palette(pos_neg)
+
+```
+
+
+
 ### Applying these within `mirror_theme()`
 
 I have adapted the theme code to bring in the fonts from the rest of the website, the text colours discussed above, and the grid line color. Here are the original plots:
@@ -323,5 +341,4 @@ palmerpenguins::penguins %>%
   mirror_theme() 
 
 ```
-
 
