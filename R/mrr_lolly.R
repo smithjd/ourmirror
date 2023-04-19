@@ -7,14 +7,11 @@
 #' @importFrom stringr str_wrap
 #' @importFrom scales percent
 #' @returns plot
-#' @param mrr_params a list containing metadata elements and a data frame named count$df
+#' @param count_df a data frame with variables var_response, c_pct,
 #' @export mrr_single_lolly
-mrr_single_lolly <- function(mrr_params) {
-  p <- {{mrr_params}}
-  mrr_title <- toString(str_wrap(p$var_label), 47)
-  mrr_caption <- toString(str_wrap(p$var_question, 55)) # needs to be a parameter
-
-  plot <- p$count_df |> ggplot2::ggplot(ggplot2::aes(c_count_var, c_pct)) +
+mrr_single_lolly <- function(count_df) {
+  plot <- count_df |>
+    ggplot2::ggplot(ggplot2::aes(var_response, c_pct)) +
     ggplot2::geom_point(color = "black",
                         size = 4,
                         shape = 21,
@@ -24,18 +21,17 @@ mrr_single_lolly <- function(mrr_params) {
     ggplot2::geom_segment(ggplot2::aes(
       y = c_pct,
       yend = 0,
-      x = c_count_var,
-      xend = c_count_var
-    ),
-    color = lolly_now ) +
+      x = var_response,
+      xend = var_response
+    )) +
     ggplot2::scale_y_continuous(labels = scales::percent,
                                 breaks = c(0, .2, .4, .6, .8, 1),
                                 limits = c(0, 1.05),
                                 ggplot2::expansion(mult = c(0, .1))) +
     ggplot2::coord_flip() +
     ourmirror::mirror_theme() +
-    ggplot2::labs(title = p$var_question) +
     ggplot2::theme(panel.grid.major.y = ggplot2::element_blank())
+
   plot
 }
 

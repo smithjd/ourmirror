@@ -4,10 +4,10 @@
 \alias{mrr_single_lolly}
 \title{single and multiple lollypop plots}
 \usage{
-mrr_single_lolly(mrr_params)
+mrr_single_lolly(count_df)
 }
 \arguments{
-\item{mrr_params}{a list containing metadata elements and a data frame named count$df}
+\item{count_df}{a data frame with variables var_response, c_pct,}
 }
 \value{
 plot

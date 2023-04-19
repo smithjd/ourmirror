@@ -62,7 +62,9 @@ mirror_theme <- function(font = "Gandhi Sans", base_size = 14) {
                                           color = shambhala_palette_function()[["Light Text"]], ),
       axis.ticks = ggplot2::element_blank(),
 
-      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.minor = element_line(color = shambhala_palette_function()[["Grid"]]),
+      # panel.grid.minor = element_line(color = "#F8F9FA"),
+      # panel.grid.minor = ggplot2::element_blank(),
       panel.grid = element_line(color = shambhala_palette_function()[["Grid"]]),
 
       # Blank background
