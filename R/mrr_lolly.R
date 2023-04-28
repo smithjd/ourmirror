@@ -48,41 +48,51 @@ mrr_single_lolly <- function(count_df) {
 #' @export mrr_comparison_lolly
 mrr_comparison_lolly <- function(df) {
   ggplot2::ggplot(df) +
-    ggplot2::geom_segment(aes(
-      y = c_pct,
-      yend = 0,
-      x = var_label,
-      xend = var_label),
-      color = lolly_now,
-      position = position_nudge(x = 0.12)) +
-    ggplot2::geom_segment(aes(
-      y = c_pct_then,
-      yend = 0,
-      x = var_label,
-      xend = var_label),
+    ggplot2::geom_segment(
+      aes(
+        y = c_pct_then,
+        yend = 0,
+        x = var_label,
+        xend = var_label
+      ),
       color = lolly_then,
-      position = position_nudge(x = -0.12) ) +
-    ggplot2::geom_point(ggplot2::aes(
-      x = var_label,
-      y = c_pct),
-      fill = lolly_now,
-      color = lolly_now,
-      size = 6,
-      alpha = 1,
-      shape = 21,
-      position = position_nudge(x = 0.12)) +
-    ggplot2::geom_point(ggplot2::aes(
-      x = var_label, y = c_pct_then),
+      position = position_nudge(x = -0.12)
+    ) +
+    ggplot2::geom_point(
+      ggplot2::aes(x = var_label, y = c_pct_then),
       color = lolly_then,
       fill = lolly_then,
       size = 4,
       alpha = 1,
       shape = 21,
-      position = position_nudge(x = -0.12)) +
-    ggplot2::scale_y_continuous(labels = scales::percent,
-                                breaks = c(0, .2, .4, .6, .8, 1),
-                                limits = c(0, 1.05),
-                                ggplot2::expansion(mult = c(0, .1))) +
+      position = position_nudge(x = -0.12)
+    ) +
+    ggplot2::geom_point(
+      ggplot2::aes(x = var_label,
+                   y = c_pct),
+      fill = lolly_now,
+      color = lolly_now,
+      size = 6,
+      alpha = 1,
+      shape = 21,
+      position = position_nudge(x = 0.12)
+    ) +
+    ggplot2::geom_segment(
+      aes(
+        y = c_pct,
+        yend = 0,
+        x = var_label,
+        xend = var_label
+      ),
+      color = lolly_now,
+      position = position_nudge(x = 0.12)
+    ) +
+    ggplot2::scale_y_continuous(
+      labels = scales::percent,
+      breaks = c(0, .2, .4, .6, .8, 1),
+      limits = c(0, 1.05),
+      ggplot2::expansion(mult = c(0, .1))
+    ) +
     ggplot2::coord_flip() +
     ourmirror::mirror_theme() +
     # ggplot2::labs(title = p$var_question) +
