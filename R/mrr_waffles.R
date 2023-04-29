@@ -15,7 +15,8 @@ mrr_waffle <- function(df, fill_var, values_var) {
     waffle::geom_waffle(
       n_rows = 10,
       make_proportional = TRUE,
-      colour = "white"
+      colour = "white",
+      na.rm = TRUE
     ) +
     ggplot2::scale_x_discrete(labels = NULL) +
     ggplot2::scale_y_discrete(labels = NULL) +
