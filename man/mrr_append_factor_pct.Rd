@@ -4,7 +4,7 @@
 \alias{mrr_append_factor_pct}
 \title{Append Percentages to Categorical Variable Labels}
 \usage{
-mrr_append_factor_pct(factor_var)
+mrr_append_factor_pct(factor_var, decimals = 1)
 }
 \arguments{
 \item{factor_var}{A categorical variable to transform}
@@ -23,4 +23,10 @@ mrr_append_factor_pct(x)
 }
 \author{
 John David Smith
+
+usage note:
+factor_vector_pct <- mrr_append_factor_pct(x)
+
+then:
+mutate(factor = fct_recode(factor, !!!factor_vector_pct))
 }
