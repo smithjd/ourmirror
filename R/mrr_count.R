@@ -113,3 +113,51 @@ mrr_count_var_list <- function(c_df, c_var_list, c_df_name) {
     dplyr::left_join(dd_all, by = c("c_var_name" = "tag", df_name = "df"))
   return(df_count)
 }
+
+#' Get a data frame with respondent ID and specified classifying variables from a given data frame
+#'
+#' @param df Data frame to extract the variables from
+#' @param classify_var_list List of classifying variables to extract
+#'
+#' @return Data frame with respondent ID and specified classifying variables
+#'
+#' @import dplyr
+#'
+#' @examples
+#' df <- data.frame(respondent_id = c(1, 2, 3),
+#'                   age = c(20, 30, 25),
+#'                   gender = c('M', 'F', 'M'))
+#'
+#' mrr_get_classifying_vars(df, c('age', 'gender'))
+#'
+#' @export mrr_get_classifying_vars
+mrr_get_classifying_vars <- function(df, classify_var_list){
+  # classifying_var_list, respondent_id)
+  var_list <- c("respondent_id", classify_var_list)
+  classifying_response_df <- df |>
+    dplyr::select(all_of(var_list)) |>
+    dplyr::mutate(respondent_id = unclass(respondent_id))
+}
+
+#' Get Multiple Response Variables
+#'
+#' Extracts a data frame with multiple response variables from a given data frame
+#'
+#' @param df dataframe to extract from
+#' @param response_var_list vector of variable names to extract
+#'
+#' @return Returns a data frame containing the respondent_id and all variables specified in response_var_list pivoted with pivot_longer
+#'
+#' @import dplyr
+#' @import tidyr
+#'
+#' @export
+mrr_get_multi_vars <- function(df, response_var_list) {
+  var_list <- c("respondent_id", response_var_list)
+  multi_response_df <- df |>
+    dplyr::select(all_of(var_list)) |>
+    dplyr::mutate(across(everything(), unclass)) |>
+    tidyr::pivot_longer(names_to = "c_var_name",
+                 values_to = "c_var_value",
+                 -respondent_id)
+}

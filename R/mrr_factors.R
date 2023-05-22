@@ -5,6 +5,8 @@
 #'
 #' @param factor_var A categorical variable to transform
 #'
+#' @param decimals the number of decimal places in the percentages added to the factors
+#'
 #' @return A named character vector with original labels appended with percentages
 #' @export mrr_append_factor_pct
 #'

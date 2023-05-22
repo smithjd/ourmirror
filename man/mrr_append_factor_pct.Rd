@@ -8,6 +8,8 @@ mrr_append_factor_pct(factor_var, decimals = 1)
 }
 \arguments{
 \item{factor_var}{A categorical variable to transform}
+
+\item{decimals}{the number of decimal places in the percentages added to the factors}
 }
 \value{
 A named character vector with original labels appended with percentages
