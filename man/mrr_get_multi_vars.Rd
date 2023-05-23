@@ -17,7 +17,3 @@ Returns a data frame containing the respondent_id and all variables specified in
 \description{
 Extracts a data frame with multiple response variables from a given data frame
 }
-\examples{
-mrr_get_multi_vars(df = my_data_frame, response_var_list = c("var1", "var2"))
-
-}

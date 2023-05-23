@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{member_type}}{
 
-A data frame with 6 rows andmember_type2 columns:
+A data frame with 6 rows and 2 columns:
 \describe{
 \item{member_type_id}{Member Type ID Number}
 \item{member_type_name}{Member Type Label}
