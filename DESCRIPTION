@@ -10,6 +10,7 @@ Encoding: UTF-8
 Imports: 
     base,
     ggplot2,
+    gmailr,
     DBI,
     RMySQL,
     tibble,
