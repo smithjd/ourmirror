@@ -4,7 +4,7 @@
 \alias{strip_underscore}
 \title{Replaces underscores with blanks for readability in a google spreadsheet}
 \usage{
-strip_underscore(df)
+names(df) <- strip_underscore(df)
 }
 \arguments{
 \item{df}{data frame where column names will be modified}
@@ -16,7 +16,7 @@ modified column names with underscores replaced by blanks
 Replaces underscores with blanks for readability in a google spreadsheet
 }
 \examples{
-\dontrun{
+\dont?run{
 # names(df) <- strip_underscore(df)
 }
 

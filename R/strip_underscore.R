@@ -3,8 +3,10 @@
 #' @param df data frame where column names will be modified
 #' @return modified column names with underscores replaced by blanks
 #'
+#' @usage names(df) <- strip_underscore(df)
+#'
 #' @examples
-#' \dontrun{
+#' \dont?run{
 #' # names(df) <- strip_underscore(df)
 #'}
 #'
