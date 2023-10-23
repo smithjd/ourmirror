@@ -14,10 +14,15 @@
 #' @importFrom gmailr gm_html_body
 #' @importFrom gmailr gm_send_message
 #'
-#' @examples
-#' mrr_gmail("sender@gmail.com", "recipient@gmail.com", "Hello", "This is the body of the email.")
-#'
 #' @export mrr_gmail
+#'
+#' @examples
+#' # example code
+#'
+#'\dontrun{
+#' mrr_gmail("sender@gmail.com", "recipient@gmail.com",
+#' "Hello", "This is the body of the email.")
+#'}
 mrr_gmail <- function(sender, recipient, title, text) {
   email <- gmailr::gm_mime() |>
     gmailr::gm_to(recipient) |>

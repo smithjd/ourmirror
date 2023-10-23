@@ -19,6 +19,10 @@ mrr_gmail(sender, recipient, title, text)
 This function allows you to send an email using the Gmail API.
 }
 \examples{
-mrr_gmail("sender@gmail.com", "recipient@gmail.com", "Hello", "This is the body of the email.")
+# example code
 
+\dontrun{
+mrr_gmail("sender@gmail.com", "recipient@gmail.com",
+"Hello", "This is the body of the email.")
+}
 }

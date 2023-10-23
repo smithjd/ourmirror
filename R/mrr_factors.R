@@ -29,6 +29,6 @@ mrr_append_factor_pct <- function(factor_var, decimals = 1) {
   total <- sum(counts)
   percents <- round(100 * counts / total, decimals)
   new_name <- paste0(names(counts), " (", percents, "%)")
-  recode_string <- setNames(old_name, new_name)
+  recode_string <- stats::setNames(old_name, new_name)
   return(recode_string)
 }
