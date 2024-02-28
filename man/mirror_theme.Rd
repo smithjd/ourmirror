@@ -4,7 +4,7 @@
 \alias{mirror_theme}
 \title{Create a ggplot2 theme}
 \usage{
-mirror_theme(font = "Gandhi Sans", base_size = 14)
+mirror_theme(font = "Gandhi Sans", base_size = 16)
 }
 \arguments{
 \item{font}{default parameter}
@@ -16,4 +16,7 @@ ggplot2::theme
 }
 \description{
 \code{mirror_theme} creates a ggplot2 theme
+
+Consider adding grid lines back with
+panel.grid.major.x = element_line(color = shambhala_palette_function()[\link{"Grid"}])
 }

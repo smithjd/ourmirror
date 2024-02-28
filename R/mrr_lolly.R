@@ -24,10 +24,6 @@ mrr_single_lolly <- function(count_df) {
       x = var_response,
       xend = var_response
     )) +
-    ggplot2::scale_y_continuous(labels = scales::percent,
-                                breaks = c(0, .2, .4, .6, .8, 1),
-                                limits = c(0, 1.05),
-                                ggplot2::expansion(mult = c(0, .1))) +
     ggplot2::coord_flip() +
     ourmirror::mirror_theme() +
     ggplot2::theme(panel.grid.major.y = ggplot2::element_blank())
@@ -86,12 +82,6 @@ mrr_comparison_lolly <- function(df) {
       ),
       color = lolly_now,
       position = position_nudge(x = 0.12)
-    ) +
-    ggplot2::scale_y_continuous(
-      labels = scales::percent,
-      breaks = c(0, .2, .4, .6, .8, 1),
-      limits = c(0, 1.05),
-      ggplot2::expansion(mult = c(0, .1))
     ) +
     ggplot2::coord_flip() +
     ourmirror::mirror_theme() +

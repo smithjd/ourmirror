@@ -16,7 +16,7 @@ modified column names with underscores replaced by blanks
 Replaces underscores with blanks for readability in a google spreadsheet
 }
 \examples{
-\dont?run{
+\dontrun{
 # names(df) <- strip_underscore(df)
 }
 

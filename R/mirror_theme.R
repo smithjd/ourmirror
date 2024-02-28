@@ -7,8 +7,12 @@
 #' @importFrom ggplot2 element_blank element_line element_rect element_text margin rel theme theme_minimal
 #' @param font default parameter
 #' @param base_size default font size
+#' @description
+#' Consider adding grid lines back with
+#'  panel.grid.major.x = element_line(color = shambhala_palette_function()[["Grid"]])
+#'
 #' @export mirror_theme
-mirror_theme <- function(font = "Gandhi Sans", base_size = 14) {
+mirror_theme <- function(font = "Gandhi Sans", base_size = 16) {
   ggplot2::theme_minimal() +
     ggplot2::theme(
       # This sets the default text color and font across the rest of the text elements
@@ -51,23 +55,16 @@ mirror_theme <- function(font = "Gandhi Sans", base_size = 14) {
 
       # Axis format
 
-      axis.title = ggplot2::element_blank(),
+      # axis.title = ggplot2::element_blank(),
       axis.text = ggplot2::element_text(
-        # We need to reset the font and color within axis text, because theme_minimal() sets its own default
         family = font,
         color = shambhala_palette_function()[["Light Text"]],
         size = ggplot2::rel(1),
       ),
-      axis.text.x = ggplot2::element_text(margin = ggplot2::margin(5, b = 10),
-                                          color = shambhala_palette_function()[["Light Text"]], ),
       axis.ticks = ggplot2::element_blank(),
-
       panel.grid.minor = element_blank(),
-      panel.grid.major = element_line(color = shambhala_palette_function()[["Grid"]]),
-
-      # Blank background
-
-      panel.background = ggplot2::element_blank(),
+      # ,S
+      panel.grid.major = element_line("grey90", linewidth = 0.5),
       strip.background = ggplot2::element_rect(fill = "white",
                                                linewidth = 0),
       strip.text = ggplot2::element_text(size = ggplot2::rel(1),

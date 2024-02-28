@@ -6,7 +6,7 @@
 #' @usage names(df) <- strip_underscore(df)
 #'
 #' @examples
-#' \dont?run{
+#' \dontrun{
 #' # names(df) <- strip_underscore(df)
 #'}
 #'

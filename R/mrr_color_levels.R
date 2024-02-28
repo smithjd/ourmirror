@@ -53,8 +53,8 @@ mrr_color_both_ways <- function(color_number, levels) {
 #' @export shambhala_palette_function
 shambhala_palette_function <- function(){
   shambhala_palette <- c(#"Light Text" = "#516877", # to be used for axes, text that is less important
-                         "Light Text" = "#40535F", # needs to be a bit darker that first draft!
-                         "Header Text" = "#303E47", # To be used for headers on the website
+                         "Light Text" = "#2E3C45", # needs to be a bit darker that first draft!
+                         "Header Text" = "#232D34", # To be used for headers on the website
                          "Dark Text" = "#101417",
                          "Grid" = "#DCE0E3",
                          "Green" = "#5AA678",
@@ -63,3 +63,5 @@ shambhala_palette_function <- function(){
                          "Blue" = "#587AA7")
 
 }
+
+# view_palette(shambhala_palette_function())

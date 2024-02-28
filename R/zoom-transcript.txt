@@ -1,0 +1,24 @@
+# read transcript
+library(tidyverse)
+
+transcript_lines <- tibble(original_text =
+  read_lines("/Users/jds/Desktop/meeting_saved_closed_caption.txt")) |>
+  mutate(speaker = str_extract(original_text, "^\\[(.*)\\]"),
+         speaker = str_remove_all(speaker, "[\\[\\]]"))
+
+(speeches <- transcript_lines |> filter(is.na(speaker)) |>
+    filter(original_text != "") |>
+    select(speeches = original_text))
+
+(speakers <- transcript_lines |> filter(speaker != "") |>
+    select(speaker)
+  )
+
+transcript <- bind_cols(speakers, speeches)
+
+transcript <- transcript |>
+  mutate(
+    turn = row_number(),
+    turn = ifelse(speaker == lag(speaker), NA, turn),
+    speaker = ifelse(speaker == lag(speaker), "", speaker)
+    )
