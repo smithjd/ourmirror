@@ -12,12 +12,12 @@
 mrr_color_steps <-
   function(color_number, levels, blend_number = 4) {
     shambhala_palette <- shambhala_palette_function()
-    monochromeR::generate_palette(
+    suppressMessages(monochromeR::generate_palette(
       shambhala_palette[color_number],
       blend_colour = shambhala_palette[blend_number],
       modification = "blend",
       n_colours = levels
-    )
+    ))
   }
 
 # view_palette(mrr_color_steps(5,3))
