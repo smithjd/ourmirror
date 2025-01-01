@@ -1,21 +1,25 @@
-#' Replaces underscores with blanks for readability in a google spreadsheet
+#' Replace Underscores with Spaces in Column Names
 #'
-#' @param df data frame where column names will be modified
-#' @return modified column names with underscores replaced by blanks
+#' This function processes data frame column names by replacing underscores with
+#' spaces to improve readability, particularly when exporting to Google Sheets.
 #'
-#' @usage names(df) <- strip_underscore(df)
+#' @param df A data frame whose column names will be modified
+#'
+#' @return A character vector of modified column names with underscores replaced
+#'   by spaces
 #'
 #' @examples
-#' \dontrun{
-#' # names(df) <- strip_underscore(df)
-#'}
+#' df <- data.frame(
+#'   customer_id = 1:3,
+#'   first_name = c("John", "Jane", "Bob"),
+#'   last_login_date = as.Date(c("2024-01-01", "2024-01-02", "2024-01-03"))
+#' )
+#' names(df) <- strip_underscore(df)
+#' # Column names are now "customer id", "first name", "last login date"
 #'
 #' @importFrom stringr str_replace_all
-#' @export strip_underscore
-
+#' @export
 strip_underscore <- function(df) {
-  # replaces underscores with blanks for readibility in a google spreadsheet
-  # usage:
-  #   names(df) <- strip_underscore(df)
-  str_replace_all(names(df), "_", " ")
+  new_names <- str_replace_all(names(df), "_", " ")
+  return(new_names)
 }

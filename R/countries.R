@@ -8,12 +8,16 @@ NULL
 #' @format ## `countries`
 #' A data frame with 241 rows and 6 columns:
 #' \describe{
-#'   \item{id}{record sequence number}
+#'   \item{id}{sdb country id}
 #'   \item{country}{country name}
-#'   \item{country_code}{numeric country code}
-#'   \item{continent}{continent code number}
+#'   \item{country_code}{character country code}
+#'   \item{continent}{character continent code}
 #'   \item{top_level_domain}{Internet domain}
-#'   \item{currency}{Currency}
+#'   \item{currency2}{Currency code}
 #' }
+#' save(countries,
+#' file = "data/countries.rda",
+#' compress = "xz")
+
 #' @source countries <- tbl(con, "countries") |> collect()
 "countries"

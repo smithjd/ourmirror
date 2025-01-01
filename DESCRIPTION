@@ -2,7 +2,7 @@ Package: ourmirror
 Type: Package
 Title: Provides a default theme and other functions for the Societal Mirror
 Version: 0.1.0
-Author: Who wrote it
+Author: John David Smith
 Maintainer: John Smith <john.smith@shambhalaglobal.org>
 Description: Sets standards for ggplot, accesses the SDB, and provides other necessary functions in use across all SGS-IT work.
 License: MIT + file LICENSE
@@ -12,6 +12,9 @@ Imports:
     ggplot2,
     gmailr,
     DBI,
+    devtools,
+    fs,
+    here,
     RMySQL,
     tibble,
     dplyr,
@@ -25,6 +28,6 @@ Authors@R: c(
     person("John", "Smith", , "john.smith@shambhalaglobal.org", role = c("ctb", "cre"))
   )
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)

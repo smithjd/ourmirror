@@ -2,22 +2,28 @@
 % Please edit documentation in R/strip_underscore.R
 \name{strip_underscore}
 \alias{strip_underscore}
-\title{Replaces underscores with blanks for readability in a google spreadsheet}
+\title{Replace Underscores with Spaces in Column Names}
 \usage{
-names(df) <- strip_underscore(df)
+strip_underscore(df)
 }
 \arguments{
-\item{df}{data frame where column names will be modified}
+\item{df}{A data frame whose column names will be modified}
 }
 \value{
-modified column names with underscores replaced by blanks
+A character vector of modified column names with underscores replaced
+by spaces
 }
 \description{
-Replaces underscores with blanks for readability in a google spreadsheet
+This function processes data frame column names by replacing underscores with
+spaces to improve readability, particularly when exporting to Google Sheets.
 }
 \examples{
-\dontrun{
-# names(df) <- strip_underscore(df)
-}
+df <- data.frame(
+  customer_id = 1:3,
+  first_name = c("John", "Jane", "Bob"),
+  last_login_date = as.Date(c("2024-01-01", "2024-01-02", "2024-01-03"))
+)
+names(df) <- strip_underscore(df)
+# Column names are now "customer id", "first name", "last login date"
 
 }

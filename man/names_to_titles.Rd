@@ -2,22 +2,31 @@
 % Please edit documentation in R/names_to_titles.R
 \name{names_to_titles}
 \alias{names_to_titles}
-\title{Replaces underscores with blanks and capitalizes first letter of each word}
+\title{Replace Underscores with Spaces and Capitalize Words}
 \usage{
-names(df) <- names_to_titles(df)
+names_to_titles(df)
 }
 \arguments{
-\item{df}{data frame where column names will be modified}
+\item{df}{A data frame whose column names will be modified}
 }
 \value{
-modified column names with underscores replaced by blanks
+A character vector of modified column names where underscores are
+replaced by spaces and words are capitalized
 }
 \description{
-Replaces underscores with blanks and capitalizes first letter of each word
+This function takes a data frame and processes its column names by:
+\enumerate{
+\item Replacing underscores with spaces
+\item Capitalizing the first letter of each word
+}
 }
 \examples{
-\dontrun{
-# names(df) <- names_to_titles(df)
-}
+df <- data.frame(
+  first_name = c("John", "Jane"),
+  last_name = c("Doe", "Smith"),
+  birth_date = as.Date(c("1990-01-01", "1992-06-15"))
+)
+names(df) <- names_to_titles(df)
+# Column names are now "First Name", "Last Name", "Birth Date"
 
 }

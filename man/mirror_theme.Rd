@@ -2,21 +2,67 @@
 % Please edit documentation in R/mirror_theme.R
 \name{mirror_theme}
 \alias{mirror_theme}
-\title{Create a ggplot2 theme}
+\title{Custom ggplot2 Theme with Mirror Design}
 \usage{
-mirror_theme(font = "Gandhi Sans", base_size = 16)
+mirror_theme(
+  font = "Gandhi Sans",
+  base_size = 16,
+  grid_color = "grey90",
+  grid_size = 0.5,
+  title_size = 1.6,
+  subtitle_size = 1.1
+)
 }
 \arguments{
-\item{font}{default parameter}
+\item{font}{The font family to use for text elements in the plot.
+Default: 'Gandhi Sans'}
 
-\item{base_size}{default font size}
+\item{base_size}{Base font size in points for scaling text elements.
+Default: 16}
+
+\item{grid_color}{Color for major grid lines. Default: 'grey90'}
+
+\item{grid_size}{Width of major grid lines. Default: 0.5}
+
+\item{title_size}{Relative size of the plot title. Default: 1.6}
+
+\item{subtitle_size}{Relative size of the plot subtitle. Default: 1.1}
 }
 \value{
-ggplot2::theme
+A ggplot2 theme object that can be added to plots using the \code{+} operator
 }
 \description{
-\code{mirror_theme} creates a ggplot2 theme
+Creates a custom theme for ggplot2 based on a minimalist design with carefully
+styled typography and spacing. The theme features customized text elements,
+gridlines, and legend formatting optimized for readability.
+}
+\examples{
+\dontrun{
+# Load required libraries
 
-Consider adding grid lines back with
-panel.grid.major.x = element_line(color = shambhala_palette_function()[\link{"Grid"}])
+library(ggplot2)
+
+# Basic usage
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(
+    title = "Car Weight vs Fuel Efficiency",
+    subtitle = "Data from the mtcars dataset"
+  ) +
+  mirror_theme()
+
+# Custom styling
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(
+    title = "Car Weight vs Fuel Efficiency",
+    subtitle = "Data from the mtcars dataset"
+  ) +
+  mirror_theme(
+    grid_color = "grey80",
+    grid_size = 0.3,
+    title_size = 2
+  )
+}
+
 }
