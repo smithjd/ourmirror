@@ -9,23 +9,26 @@
 #' @importFrom DBI dbSendQuery
 #' @export db_init
 db_init <- function(db = c("sdb", "network")) {
-db_choice <- base::match.arg(db)
+  db_choice <- base::match.arg(db)
   if (db_choice == "sdb") {
-  con <- RMySQL::dbConnect(
-    RMySQL::MySQL(),
-    user = base::Sys.getenv("SDB_USER"),
-    password = base::Sys.getenv("SDB_PASSWORD"),
-    dbname = "sdb",
-    host = base::Sys.getenv("SDB_SERVER_IP"),
-    port = 3306
-  )
+    con <- RMySQL::dbConnect(
+      RMySQL::MySQL(),
+      user = base::Sys.getenv("SDB_USER"),
+      password = base::Sys.getenv("SDB_PASSWORD"),
+      dbname = "sdb",
+      host = base::Sys.getenv("SDB_SERVER_IP"),
+      port = 3306,
+      bigint = "numeric" # This explicitly handles unsigned integers
+    )
   } else if (db_choice == "network") {
     con <- dbConnect(
       RMySQL::MySQL(),
       user = base::Sys.getenv("SDB_USER"),
       password = base::Sys.getenv("SDB_PASSWORD"),
       dbname = "db26780_25",
-      host = base::Sys.getenv("SN_SERVER_IP"), port = 3306
+      host = base::Sys.getenv("SN_SERVER_IP"),
+      port = 3306,
+      bigint = "numeric" # This explicitly handles unsigned integers
     )
   }
   DBI::dbSendQuery(con, "SET NAMES utf8;")
