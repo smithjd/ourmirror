@@ -2,19 +2,18 @@
 % Please edit documentation in R/names_to_titles.R
 \name{names_to_titles}
 \alias{names_to_titles}
-\title{Replace Underscores with Spaces and Capitalize Words}
+\title{Rename Columns with Title Case}
 \usage{
 names_to_titles(df)
 }
 \arguments{
-\item{df}{A data frame whose column names will be modified}
+\item{df}{A data frame to modify}
 }
 \value{
-A character vector of modified column names where underscores are
-replaced by spaces and words are capitalized
+The input data frame with modified column names
 }
 \description{
-This function takes a data frame and processes its column names by:
+This function takes a data frame and modifies its column names by:
 \enumerate{
 \item Replacing underscores with spaces
 \item Capitalizing the first letter of each word
@@ -26,7 +25,7 @@ df <- data.frame(
   last_name = c("Doe", "Smith"),
   birth_date = as.Date(c("1990-01-01", "1992-06-15"))
 )
-names(df) <- names_to_titles(df)
+df <- names_to_titles(df)
 # Column names are now "First Name", "Last Name", "Birth Date"
 
 }
