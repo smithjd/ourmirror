@@ -1,6 +1,13 @@
 Our Mirror
 ================
 
+## Install
+
+```
+library(devtools)
+install_github("smithjd/ourmirror")
+```
+
 ## Shambhala colours
 
 Here are Shambhala’s standard colors:
