@@ -2,16 +2,45 @@
 % Please edit documentation in R/db_init.R
 \name{db_init}
 \alias{db_init}
-\title{Open a connection to the SDB}
+\title{Initialize Database Connection to the SDB}
 \usage{
 db_init(db = c("sdb", "network"))
 }
 \arguments{
-\item{db}{which of 2 databases to query}
+\item{db}{Character string specifying which database to connect to.
+Must be either "sdb" or "network". Default is "sdb".}
 }
 \value{
-con object
+A database connection object of class MariaDBConnection.
 }
 \description{
-\code{sdb_init} runs 2 queries to insure that downloads come back in utf8 format
+Establishes a connection to either the SDB or Network database using RMariaDB.
+The function automatically configures UTF-8 character encoding for proper
+handling of international characters.
+}
+\details{
+The function requires the following environment variables to be set:
+\itemize{
+\item \code{SDB_USER}: Database username
+\item \code{SDB_PASSWORD}: Database password
+\item \code{SDB_SERVER_IP}: Server IP address for SDB database
+\item \code{SN_SERVER_IP}: Server IP address for Network database
+}
+
+Both databases connect on port 3306 and use the \code{bigint = "numeric"}
+parameter to properly handle unsigned integers.
+}
+\examples{
+\dontrun{
+# Connect to SDB database
+con_sdb <- db_init("sdb")
+
+# Connect to Network database
+con_network <- db_init("network")
+
+# Remember to close connections when done
+DBI::dbDisconnect(con_sdb)
+DBI::dbDisconnect(con_network)
+}
+
 }
