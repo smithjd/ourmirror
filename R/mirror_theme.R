@@ -160,8 +160,8 @@ mirror_theme <- function(
         hjust = 0,
         margin = ggplot2::margin(t = 10, b = 10)
       ),
-      strip.placement = "inside", # or "outside"
-      aspect.ratio = NULL, # Can be overridden by user
-      complete = complete
+      strip.placement = "inside",
+      aspect.ratio = NULL
+      # Remove the line: complete = complete
     )
 }
