@@ -46,13 +46,14 @@
 #'
 #' @import ggplot2
 #' @export
-mirror_theme <- function(font = "Gandhi Sans",
-                         base_size = 16,
-                         grid_color = "grey90",
-                         grid_size = 0.5,
-                         title_size = 1.6,
-                         subtitle_size = 1.1) {
-
+mirror_theme <- function(
+  font = "Gandhi Sans",
+  base_size = 16,
+  grid_color = "grey90",
+  grid_size = 0.5,
+  title_size = 1.6,
+  subtitle_size = 1.1
+) {
   # Get color palette
   colors <- shambhala_palette_function()
 
@@ -112,6 +113,7 @@ mirror_theme <- function(font = "Gandhi Sans",
         linewidth = grid_size
       ),
       panel.spacing = ggplot2::unit(2, "lines"),
+      plot.margin = unit(c(10, 10, 10, 10), "pt"),
 
       # Legend formatting
       legend.position = "bottom",
@@ -128,15 +130,19 @@ mirror_theme <- function(font = "Gandhi Sans",
         size = ggplot2::rel(0.8),
         margin = ggplot2::margin(r = 10)
       ),
+      legend.key = element_blank(),
+      legend.key.size = unit(1, "lines"),
       legend.spacing.x = ggplot2::unit(5, "points"),
       legend.spacing.y = ggplot2::unit(5, "points"),
       legend.margin = ggplot2::margin(t = 10, b = 10),
 
       # Axis formatting
       axis.title = ggplot2::element_text(
-        size = ggplot2::rel(1),
-        margin = ggplot2::margin(t = 10, b = 10)
+        size = ggplot2::rel(1)
       ),
+      axis.title.x = element_text(margin = margin(t = 10)),
+      axis.title.y = element_text(margin = margin(r = 10)),
+      axis.line = element_blank(), # Explicitly set if intended
       axis.text = ggplot2::element_text(
         size = ggplot2::rel(0.9),
         margin = ggplot2::margin(t = 5, b = 5)
@@ -153,6 +159,9 @@ mirror_theme <- function(font = "Gandhi Sans",
         face = "bold",
         hjust = 0,
         margin = ggplot2::margin(t = 10, b = 10)
-      )
+      ),
+      strip.placement = "inside", # or "outside"
+      aspect.ratio = NULL, # Can be overridden by user
+      complete = complete
     )
 }
