@@ -21,6 +21,7 @@ Imports:
     scales,
     stringr,
     tidyr,
+    gt,
     monochromeR,
     waffle
 LazyData: true
