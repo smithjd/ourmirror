@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(Rscript -e \"devtools::document\\(\\); devtools::load_all\\(\\)\")"
+      "Bash(Rscript -e \"devtools::document\\(\\); devtools::load_all\\(\\)\")",
+      "Bash(Rscript -e ' *)"
     ]
   }
 }
