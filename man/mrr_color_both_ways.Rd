@@ -2,7 +2,7 @@
 % Please edit documentation in R/mrr_color_levels.R
 \name{mrr_color_both_ways}
 \alias{mrr_color_both_ways}
-\title{Generate a color palette with a specified number of steps}
+\title{Generate a symmetric light-to-dark color palette}
 \usage{
 mrr_color_both_ways(color_number, levels)
 }
@@ -15,5 +15,9 @@ mrr_color_both_ways(color_number, levels)
 A vector of colors with the specified number of steps
 }
 \description{
-Generate a color palette with a specified number of steps
+Thin wrapper around \code{monochromeR::generate_palette()} kept for backward
+compatibility. Ramps a base brand hue both lighter and darker around itself.
+}
+\seealso{
+\code{\link[=mrr_pal_sequential]{mrr_pal_sequential()}}
 }

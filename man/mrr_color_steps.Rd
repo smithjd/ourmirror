@@ -17,9 +17,15 @@ mrr_color_steps(color_number, levels, blend_number = 4)
 A vector of colors with the specified number of steps
 }
 \description{
-Generate a color palette with a specified number of steps
+Thin wrapper around \code{\link[=mrr_pal_sequential]{mrr_pal_sequential()}} kept for backward compatibility.
+Blends a base brand hue toward a second brand colour (default: the gridline
+gray), hue -> blend. New code should prefer \code{\link[=mrr_pal_sequential]{mrr_pal_sequential()}}, which
+takes hue \emph{names} rather than palette indices.
 }
 \examples{
 mrr_color_steps(5, 5, 4)
 
+}
+\seealso{
+\code{\link[=mrr_pal_sequential]{mrr_pal_sequential()}}
 }
