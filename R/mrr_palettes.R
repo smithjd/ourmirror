@@ -195,6 +195,41 @@ scale_fill_mirror_steps <- function(hue = "Green", direction = 1, ...) {
 
 .mrr_stoplight_residual <- unname(shambhala_palette_function()[["Grid"]])
 
+# Soft mid-positive ("light green") tier. No dedicated pole exists, so it is
+# interpolated as the midpoint between the `mid` and `positive` poles — keeping
+# it ordinally correct (it always sits between amber and green in the 5-category
+# "connection to larger Shambhala" charts) and derived from the same source of
+# truth rather than being a fresh literal.
+.mrr_stoplight_lightgreen <- grDevices::colorRampPalette(
+  .mrr_stoplight_hues[c("mid", "positive")]
+)(3)[2]
+
+#' Soft stoplight palette as named semantic constants
+#'
+#' Returns the softened stoplight ramp as a single named character vector using
+#' the semantic names the centre pages consume (`red`, `orange`, `amber`,
+#' `lightgreen`, `green`, `grey`). This is the source of truth those pages should
+#' draw from instead of hard-coding hexes; it maps the four brand-anchored poles
+#' (plus an interpolated mid-positive tier and the residual grey) onto the legacy
+#' names.
+#'
+#' @return A named character vector of hex colours: `red`, `orange`, `amber`,
+#'   `lightgreen`, `green`, `grey`.
+#' @examples
+#' mrr_stoplight_constants()[["red"]]
+#'
+#' @export
+mrr_stoplight_constants <- function() {
+  c(
+    red        = unname(.mrr_stoplight_hues[["negative"]]),
+    orange     = unname(.mrr_stoplight_hues[["mid_low"]]),
+    amber      = unname(.mrr_stoplight_hues[["mid"]]),
+    lightgreen = unname(.mrr_stoplight_lightgreen),
+    green      = unname(.mrr_stoplight_hues[["positive"]]),
+    grey       = .mrr_stoplight_residual
+  )
+}
+
 #' Choose readable text ink for a set of fill colours
 #'
 #' Returns "white" or the brand dark-ink colour per fill. White is preferred
