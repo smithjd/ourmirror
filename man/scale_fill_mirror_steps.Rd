@@ -11,7 +11,7 @@ scale_fill_mirror_steps(hue = "Green", direction = 1, ...)
 
 \item{direction}{1 for light -> dark (default), -1 to reverse.}
 
-\item{...}{Passed on to \code{\link[ggplot2:scale_steps]{ggplot2::scale_fill_stepsn()}}.}
+\item{...}{Passed on to \code{\link[ggplot2:scale_fill_stepsn]{ggplot2::scale_fill_stepsn()}}.}
 }
 \value{
 A ggplot2 binned fill scale.

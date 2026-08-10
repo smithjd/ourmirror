@@ -11,7 +11,7 @@ scale_fill_mirror_c(hue = "Green", direction = 1, ...)
 
 \item{direction}{1 for light -> dark (default), -1 to reverse.}
 
-\item{...}{Passed on to \code{\link[ggplot2:scale_gradient]{ggplot2::scale_fill_gradientn()}}.}
+\item{...}{Passed on to \code{\link[ggplot2:scale_fill_gradientn]{ggplot2::scale_fill_gradientn()}}.}
 }
 \value{
 A ggplot2 continuous fill scale.
