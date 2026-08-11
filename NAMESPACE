@@ -5,6 +5,7 @@ export(mirror_theme)
 export(mrr_append_factor_pct)
 export(mrr_cat_center_size_count)
 export(mrr_cat_center_size_members)
+export(mrr_collapse_years)
 export(mrr_color_both_ways)
 export(mrr_color_steps)
 export(mrr_comparison_lolly)
@@ -21,9 +22,12 @@ export(mrr_meta)
 export(mrr_pal_categorical)
 export(mrr_pal_sequential)
 export(mrr_pal_stoplight)
+export(mrr_pivot_survey)
+export(mrr_prep_survey_vars)
 export(mrr_single_lolly)
 export(mrr_stoplight_constants)
 export(mrr_stoplight_ink)
+export(mrr_subset_by_role)
 export(mrr_waffle)
 export(names_to_titles)
 export(scale_color_mirror_d)
@@ -33,6 +37,7 @@ export(scale_fill_mirror_d)
 export(scale_fill_mirror_steps)
 export(scale_fill_stoplight)
 export(shambhala_palette_function)
+export(strip_dots)
 export(strip_html_tags)
 export(strip_underscore)
 import(ggplot2)
@@ -59,8 +64,13 @@ importFrom(dplyr,
   left_join,
   mutate,
   pull,
+  rename,
   select,
   ungroup
+)
+importFrom(forcats,
+  fct_collapse,
+  fct_relabel
 )
 importFrom(fs,dir_ls)
 importFrom(ggplot2,
@@ -84,12 +94,21 @@ importFrom(gmailr,
   gm_to
 )
 importFrom(here,here)
+importFrom(labelled,
+  to_character,
+  var_label
+)
+importFrom(purrr,
+  map,
+  set_names
+)
 importFrom(rlang,.data)
 importFrom(scales,percent)
 importFrom(stringr,
   str_detect,
   str_replace_all,
   str_to_title,
+  str_trim,
   str_wrap
 )
 importFrom(tibble,
