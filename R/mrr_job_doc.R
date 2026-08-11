@@ -33,6 +33,7 @@ mrr_job_doc <- function() {
 #' @importFrom fs dir_ls
 #' @importFrom dplyr arrange desc pull select
 #' @importFrom tibble as_tibble
+#' @importFrom utils head
 #' @export mrr_get_last_updated_source
 mrr_get_last_updated_source <- function() {
   fs::dir_ls(regexp = "Rmd$|Qmd$|R$") |>

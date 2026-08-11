@@ -11,6 +11,7 @@
 #' @param center_size_category Name for the new categorical variable. Default: "center_size"
 #'
 #' @return Data frame with added ordered factor column for size categories
+#' @importFrom dplyr mutate case_when
 #' @export
 #'
 #' @examples

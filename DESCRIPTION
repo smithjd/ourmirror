@@ -7,7 +7,7 @@ Maintainer: John Smith <john.smith@shambhalaglobal.org>
 Description: Sets standards for ggplot, accesses the SDB, and provides other necessary functions in use across all SGS-IT work.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: 
+Imports:
     base,
     ggplot2,
     gmailr,
@@ -23,7 +23,8 @@ Imports:
     tidyr,
     gt,
     monochromeR,
-    waffle
+    waffle,
+    rlang
 LazyData: true
 Authors@R: c(
     person("John", "Smith", , "john.smith@shambhalaglobal.org", role = c("ctb", "cre"))
@@ -31,7 +32,8 @@ Authors@R: c(
 Roxygen: list(markdown = TRUE)
 Depends: 
     R (>= 3.5)
-Suggests: 
-    testthat (>= 3.0.0)
+Suggests:
+    testthat (>= 3.0.0),
+    withr
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.1.0

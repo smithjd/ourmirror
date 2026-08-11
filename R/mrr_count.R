@@ -5,14 +5,15 @@
 #'
 #' @returns params
 #' @importFrom dplyr filter count mutate
+#' @importFrom rlang .data
 #' @param c_dfname documented in the dd_all data frame
 #' @param c_varname The variable to be documented
 #' @export mrr_get_dd
-mrr_get_dd <- function(c_dfname, c_varname){
+mrr_get_dd <- function(c_dfname, c_varname) {
   # returns a list
   dfname <- deparse(match.call()$c_dfname)
   params <- dd_all |>
-    dplyr::filter(df == dfname, tag == {{c_varname}} ) |>
+    dplyr::filter(.data$df == dfname, .data$tag == {{ c_varname }}) |>
     as.list()
   return(params)
 }
@@ -44,8 +45,9 @@ mrr_get_dd <- function(c_dfname, c_varname){
 #'           names(df_count) <- c("c_count_var_then", "c_n_then", "c_pct_then")
 #'
 #' @returns df_count
-#' @importFrom dplyr filter count mutate select group_by
+#' @importFrom dplyr filter count mutate select group_by across ungroup left_join
 #' @importFrom tidyr pivot_longer
+#' @importFrom rlang .data
 #' @param c_df The dataset to be counted
 #' @param c_start_var The first variable in a sequence to be counted
 #' @param c_end_var The variable in a sequence to be counted
@@ -54,20 +56,22 @@ mrr_get_dd <- function(c_dfname, c_varname){
 mrr_count_var_sequence <- function(c_df, c_start_var, c_end_var, c_df_name) {
   c_denominator <- nrow(c_df)
   df_count <- c_df |>
-    dplyr::select(respondent_id,
-                  {{c_start_var}}:{{c_end_var}}) |>
-    mutate(across(everything(), unclass)) |>
-    # could have a step at the end that restores factor levels...
-    tidyr::pivot_longer(names_to = "c_var_name",
-                        values_to = "c_var_value",
-                        -respondent_id) |>
-    dplyr::filter(!is.na(c_var_value)) |>
-    dplyr::count(c_var_name, c_var_value, name = "n_response_count") |>
-    dplyr::group_by(c_var_name) |>
-    dplyr::mutate(c_pct = (n_response_count / c_denominator),
-                  df_name = c_df_name) |>
+    dplyr::select(respondent_id, {{ c_start_var }}:{{ c_end_var }}) |>
+    dplyr::mutate(dplyr::across(dplyr::everything(), unclass)) |>
+    tidyr::pivot_longer(
+      names_to = "c_var_name",
+      values_to = "c_var_value",
+      -respondent_id
+    ) |>
+    dplyr::filter(!is.na(.data$c_var_value)) |>
+    dplyr::count(.data$c_var_name, .data$c_var_value, name = "n_response_count") |>
+    dplyr::group_by(.data$c_var_name) |>
+    dplyr::mutate(
+      c_pct = (.data$n_response_count / c_denominator),
+      df_name = c_df_name
+    ) |>
     dplyr::left_join(dd_all, by = c("c_var_name" = "tag", df_name = "df")) |>
-    ungroup()
+    dplyr::ungroup()
   return(df_count)
 }
 
@@ -91,8 +95,9 @@ mrr_count_var_sequence <- function(c_df, c_start_var, c_end_var, c_df_name) {
 #'           names(df_count) <- c("c_count_var_then", "c_n_then", "c_pct_then")
 #'
 #' @returns df_count
-#' @importFrom dplyr filter count mutate select group_by
+#' @importFrom dplyr filter count mutate select group_by any_of left_join
 #' @importFrom tidyr pivot_longer
+#' @importFrom rlang .data
 #' @param c_df The dataset to be counted
 #' @param c_var_list The list of variables to be counted
 #' @param c_df_name the survey id, for chained calls where 'c_df' is not *true*
@@ -101,15 +106,19 @@ mrr_count_var_list <- function(c_df, c_var_list, c_df_name) {
   dfname <- deparse(match.call()$c_df)
   select_list <- c("respondent_id", c_var_list)
   df_count <- c_df |>
-    dplyr::select(any_of(c(select_list))) |>
-    tidyr::pivot_longer(names_to = "c_var_name",
-                        values_to = "c_var_value",
-                        -respondent_id) |>
-    dplyr::filter(!is.na(c_var_value)) |>
-    dplyr::count(c_var_name, c_var_value, name = "n_response_count") |>
-    dplyr::group_by(c_var_name) |>
-    dplyr::mutate(c_pct = n_response_count / sum(n_response_count),
-                  df_name = dfname) |>
+    dplyr::select(dplyr::any_of(c(select_list))) |>
+    tidyr::pivot_longer(
+      names_to = "c_var_name",
+      values_to = "c_var_value",
+      -respondent_id
+    ) |>
+    dplyr::filter(!is.na(.data$c_var_value)) |>
+    dplyr::count(.data$c_var_name, .data$c_var_value, name = "n_response_count") |>
+    dplyr::group_by(.data$c_var_name) |>
+    dplyr::mutate(
+      c_pct = .data$n_response_count / sum(.data$n_response_count),
+      df_name = dfname
+    ) |>
     dplyr::left_join(dd_all, by = c("c_var_name" = "tag", df_name = "df"))
   return(df_count)
 }
@@ -121,7 +130,8 @@ mrr_count_var_list <- function(c_df, c_var_list, c_df_name) {
 #'
 #' @return Data frame with respondent ID and specified classifying variables
 #'
-#' @import dplyr
+#' @importFrom dplyr select all_of mutate
+#' @importFrom rlang .data
 #'
 #' @examples
 #' df <- data.frame(respondent_id = c(1, 2, 3),
@@ -131,12 +141,11 @@ mrr_count_var_list <- function(c_df, c_var_list, c_df_name) {
 #' mrr_get_classifying_vars(df, c('age', 'gender'))
 #'
 #' @export mrr_get_classifying_vars
-mrr_get_classifying_vars <- function(df, classify_var_list){
-  # classifying_var_list, respondent_id)
+mrr_get_classifying_vars <- function(df, classify_var_list) {
   var_list <- c("respondent_id", classify_var_list)
   classifying_response_df <- df |>
-    dplyr::select(all_of(var_list)) |>
-    dplyr::mutate(respondent_id = unclass(respondent_id))
+    dplyr::select(dplyr::all_of(var_list)) |>
+    dplyr::mutate(respondent_id = unclass(.data$respondent_id))
 }
 
 #' Get Multiple Response Variables
@@ -148,16 +157,19 @@ mrr_get_classifying_vars <- function(df, classify_var_list){
 #'
 #' @return Returns a data frame containing the respondent_id and all variables specified in response_var_list pivoted with pivot_longer
 #'
-#' @import dplyr
-#' @import tidyr
+#' @importFrom dplyr select all_of mutate across everything
+#' @importFrom tidyr pivot_longer
+#' @importFrom rlang .data
 #'
 #' @export
 mrr_get_multi_vars <- function(df, response_var_list) {
   var_list <- c("respondent_id", response_var_list)
   multi_response_df <- df |>
-    dplyr::select(all_of(var_list)) |>
-    dplyr::mutate(across(everything(), unclass)) |>
-    tidyr::pivot_longer(names_to = "c_var_name",
-                 values_to = "c_var_value",
-                 -respondent_id)
+    dplyr::select(dplyr::all_of(var_list)) |>
+    dplyr::mutate(dplyr::across(dplyr::everything(), unclass)) |>
+    tidyr::pivot_longer(
+      names_to = "c_var_name",
+      values_to = "c_var_value",
+      -respondent_id
+    )
 }

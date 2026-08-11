@@ -13,16 +13,17 @@ mrr_gmail(sender, recipient, title, text)
 
 \item{title}{The subject of the email.}
 
-\item{text}{The content of the email.}
+\item{text}{The HTML content of the email.}
 }
 \description{
 This function allows you to send an email using the Gmail API.
 }
 \examples{
 # example code
+# assumes https://gmailr.r-lib.org/dev/articles/oauth-client.html
 
 \dontrun{
 mrr_gmail("sender@gmail.com", "recipient@gmail.com",
-"Hello", "This is the body of the email.")
+"Hello", "Here is my list:<ul><li>Some text</li><li>More</li></ul>")
 }
 }

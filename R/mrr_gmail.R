@@ -5,7 +5,7 @@
 #' @param sender The email address of the sender.
 #' @param recipient The email address of the recipient.
 #' @param title The subject of the email.
-#' @param text The content of the email.
+#' @param text The HTML content of the email.
 #'
 #' @importFrom gmailr gm_mime
 #' @importFrom gmailr gm_to
@@ -18,10 +18,11 @@
 #'
 #' @examples
 #' # example code
+#' # assumes https://gmailr.r-lib.org/dev/articles/oauth-client.html
 #'
 #'\dontrun{
 #' mrr_gmail("sender@gmail.com", "recipient@gmail.com",
-#' "Hello", "This is the body of the email.")
+#' "Hello", "Here is my list:<ul><li>Some text</li><li>More</li></ul>")
 #'}
 mrr_gmail <- function(sender, recipient, title, text) {
   email <- gmailr::gm_mime() |>
@@ -30,6 +31,6 @@ mrr_gmail <- function(sender, recipient, title, text) {
     gmailr::gm_subject(title) |>
     gmailr::gm_html_body(text)
 
-  email  |>
+  email |>
     gmailr::gm_send_message()
 }

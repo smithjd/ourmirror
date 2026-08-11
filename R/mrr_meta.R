@@ -4,6 +4,7 @@
 #' `mrr_meta` returns a list that contains metadata
 #'
 #' @importFrom dplyr filter select
+#' @importFrom stringr str_detect
 #' @returns meta_list
 #' @param c_df_name documented in the dd_all data frame
 #' @param c_varname The variable to be documented

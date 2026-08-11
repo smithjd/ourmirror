@@ -14,6 +14,7 @@
 #'
 #' @return Data frame with added ordered factor column for center size categories
 #' @details Preserves existing group structure of input data frame
+#' @importFrom dplyr group_by mutate case_when groups
 #' @export
 #'
 #' @examples

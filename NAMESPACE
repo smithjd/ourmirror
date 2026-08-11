@@ -35,11 +35,9 @@ export(scale_fill_stoplight)
 export(shambhala_palette_function)
 export(strip_html_tags)
 export(strip_underscore)
-import(dplyr)
 import(ggplot2)
 import(gt)
 import(monochromeR)
-import(tidyr)
 importFrom(DBI,dbSendQuery)
 importFrom(RMariaDB,
   MariaDB,
@@ -47,23 +45,33 @@ importFrom(RMariaDB,
 )
 importFrom(devtools,session_info)
 importFrom(dplyr,
+  across,
+  all_of,
+  any_of,
   arrange,
+  case_when,
   count,
   desc,
+  everything,
   filter,
   group_by,
+  groups,
+  left_join,
   mutate,
   pull,
-  select
+  select,
+  ungroup
 )
 importFrom(fs,dir_ls)
 importFrom(ggplot2,
+  aes,
   coord_flip,
   element_blank,
   expansion,
   geom_point,
   geom_segment,
   labs,
+  position_nudge,
   scale_y_continuous,
   theme
 )
@@ -76,8 +84,10 @@ importFrom(gmailr,
   gm_to
 )
 importFrom(here,here)
+importFrom(rlang,.data)
 importFrom(scales,percent)
 importFrom(stringr,
+  str_detect,
   str_replace_all,
   str_to_title,
   str_wrap
@@ -87,4 +97,5 @@ importFrom(tibble,
   tibble
 )
 importFrom(tidyr,pivot_longer)
+importFrom(utils,head)
 importFrom(waffle,geom_waffle)
