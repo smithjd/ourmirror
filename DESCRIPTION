@@ -25,14 +25,17 @@ Imports:
     monochromeR,
     waffle,
     rlang,
-    connections
+    connections,
+    forcats,
+    labelled,
+    purrr
 LazyData: true
 Authors@R: c(
     person("John", "Smith", , "john.smith@shambhalaglobal.org", role = c("ctb", "cre"))
   )
 Roxygen: list(markdown = TRUE)
 Depends: 
-    R (>= 3.5)
+    R (>= 4.1.0)
 Suggests:
     testthat (>= 3.0.0),
     withr
